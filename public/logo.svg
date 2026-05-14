@@ -1,7 +1,7 @@
-<svg width="980" height="220" viewBox="0 0 980 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="900" height="220" viewBox="0 0 900 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">The Health Watchers logo</title>
   <desc id="desc">A navy and green healthcare logo with a protective hand, heart, medical cross, and the words The Health Watchers.</desc>
-  <rect width="980" height="220" fill="white"/>
+  <rect width="900" height="220" fill="white"/>
   <g transform="translate(34 26)">
     <path d="M29 103C36 40 88 5 147 17C181 24 203 44 217 69C202 53 181 42 154 40C100 36 57 65 47 112C37 160 70 192 116 201C80 199 48 184 31 158C21 143 24 123 29 103Z" fill="#062B55"/>
     <path d="M235 78C248 125 224 176 175 195C148 206 119 205 96 195C126 197 160 190 184 171C211 150 227 118 235 78Z" fill="#43A047"/>
@@ -11,9 +11,9 @@
     <circle cx="147" cy="47" r="17" fill="#062B55"/>
     <path d="M139 90H118V113H139V135H163V113H184V90H163V68H139V90Z" fill="#062B55"/>
   </g>
-  <g transform="translate(328 38)">
-    <text x="0" y="47" font-family="Inter, Arial, Helvetica, sans-serif" font-size="48" font-weight="500" fill="#062B55">The</text>
-    <text x="0" y="126" font-family="Inter, Arial, Helvetica, sans-serif" font-size="82" font-weight="700" letter-spacing="-3" fill="#062B55">Health</text>
-    <text x="350" y="126" font-family="Inter, Arial, Helvetica, sans-serif" font-size="82" font-weight="700" letter-spacing="-3" fill="#43A047">Watchers</text>
+  <g transform="translate(320 42)">
+    <text x="0" y="43" font-family="Inter, Arial, Helvetica, sans-serif" font-size="46" font-weight="500" fill="#062B55">The</text>
+    <text x="0" y="124" font-family="Inter, Arial, Helvetica, sans-serif" font-size="82" font-weight="700" letter-spacing="-3" fill="#062B55">Health</text>
+    <text x="283" y="124" font-family="Inter, Arial, Helvetica, sans-serif" font-size="82" font-weight="700" letter-spacing="-3" fill="#43A047">Watchers</text>
   </g>
 </svg>
