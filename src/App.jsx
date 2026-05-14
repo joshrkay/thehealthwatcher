@@ -78,11 +78,31 @@ const audiences = [
 ];
 
 const modelSteps = [
-  ["01", "Identify the right patients", "We help partners identify patients and residents who may benefit from in-home medical visits, telemedicine follow-up, care gap closure, or more structured clinical support."],
-  ["02", "Build the care workflow", "We align eligibility, documentation expectations, communication rules, escalation thresholds, and reporting cadence."],
-  ["03", "Engage and monitor", "Our team supports patient outreach, medical visit coordination, virtual follow-up, care gap closure, and care-team communication."],
-  ["04", "Coordinate and escalate", "When patient needs change, we help route the right information to the right person with the right documentation."],
-  ["05", "Report and improve", "Partners get visibility into activity, care gaps, trends, and opportunities to refine the program over time."],
+  [
+    "01",
+    "Identify the right patients",
+    "We help partners identify patients and residents who may benefit from in-home medical visits, telemedicine follow-up, care gap closure, or more structured clinical support.",
+  ],
+  [
+    "02",
+    "Build the care workflow",
+    "We align eligibility, documentation expectations, communication rules, escalation thresholds, and reporting cadence.",
+  ],
+  [
+    "03",
+    "Engage and monitor",
+    "Our team supports patient outreach, medical visit coordination, virtual follow-up, care gap closure, and care-team communication.",
+  ],
+  [
+    "04",
+    "Coordinate and escalate",
+    "When patient needs change, we help route the right information to the right person with the right documentation.",
+  ],
+  [
+    "05",
+    "Report and improve",
+    "Partners get visibility into activity, care gaps, trends, and opportunities to refine the program over time.",
+  ],
 ];
 
 const technologyItems = [
@@ -105,13 +125,13 @@ const serviceAreas = [
 
 const images = {
   hero:
-    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1400&q=80",
   homeVisit:
-    "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=1400&q=80",
   clinicalTeam:
-    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1400&q=80",
   seniorLiving:
-    "https://images.unsplash.com/photo-1576765607924-5f4f510de7d0?auto=format&fit=crop&w=1200&q=85",
+    "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1400&q=80",
 };
 
 const faqs = [
@@ -173,7 +193,8 @@ const serviceSchema = {
     name: "The Health Watchers",
     url: "https://thehealthwatchers.com",
   },
-  serviceType: "In-home medical visits, telemedicine, care gap closure, and senior living medical support",
+  serviceType:
+    "In-home medical visits, telemedicine, care gap closure, and senior living medical support",
   areaServed: serviceAreas,
   audience: [
     "Population health organizations",
@@ -239,20 +260,35 @@ function SEO() {
     };
 
     upsertMeta('meta[name="description"]', { name: "description", content: description });
-    upsertMeta('meta[name="robots"]', { name: "robots", content: "index, follow, max-image-preview:large" });
+    upsertMeta('meta[name="robots"]', {
+      name: "robots",
+      content: "index, follow, max-image-preview:large",
+    });
     upsertMeta('meta[name="keywords"]', {
       name: "keywords",
       content:
         "population health medical care, in-home medical visits, home-based medical care, telemedicine support, senior living medical support, care gap closure, high-risk patient care, Michigan healthcare, Metro Detroit in-home medical care",
     });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: title });
-    upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
+    upsertMeta('meta[property="og:description"]', {
+      property: "og:description",
+      content: description,
+    });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
-    upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "The Health Watchers" });
-    upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
+    upsertMeta('meta[property="og:site_name"]', {
+      property: "og:site_name",
+      content: "The Health Watchers",
+    });
+    upsertMeta('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary_large_image",
+    });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: title });
-    upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: description });
+    upsertMeta('meta[name="twitter:description"]', {
+      name: "twitter:description",
+      content: description,
+    });
     upsertLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
 
     upsertJsonLd("health-watchers-organization-schema", organizationSchema);
@@ -265,6 +301,7 @@ function SEO() {
 
 function Logo({ variant = "header" }) {
   const sizeClass = variant === "footer" ? "h-16 w-auto" : "h-14 w-auto sm:h-16";
+
   return (
     <a href="#top" className="flex min-w-0 items-center" aria-label="The Health Watchers home">
       <img src="/logo.svg" alt="The Health Watchers" className={sizeClass} />
@@ -277,12 +314,16 @@ function Header() {
 
   useEffect(() => {
     if (!open) return;
+
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
     const handleKeyDown = (event) => {
       if (event.key === "Escape") setOpen(false);
     };
+
     window.addEventListener("keydown", handleKeyDown);
+
     return () => {
       document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
@@ -294,12 +335,14 @@ function Header() {
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8">
           <Logo />
+
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
             {navItems.map((item) => (
               <a key={item.href} href={item.href} className="text-sm font-medium text-slate-700 transition hover:text-[#0F4C5C]">
                 {item.label}
               </a>
             ))}
+
             <div className="group relative">
               <a href="#about" className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 transition hover:text-[#0F4C5C]">
                 About
@@ -314,6 +357,7 @@ function Header() {
               </div>
             </div>
           </nav>
+
           <div className="hidden items-center gap-3 lg:flex">
             <a href="tel:2487165130" className="text-sm font-semibold text-slate-700 transition hover:text-[#0F4C5C]">
               248-716-5130
@@ -323,6 +367,7 @@ function Header() {
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
+
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -350,25 +395,30 @@ function Header() {
                 <X className="h-5 w-5" />
               </button>
             </div>
+
             <nav className="mt-8 grid shrink-0 gap-2" aria-label="Mobile navigation">
               {navItems.map((item) => (
                 <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base font-semibold text-slate-900 transition hover:bg-slate-50">
                   {item.label}
                 </a>
               ))}
+
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-2">
                 <a href="#about" onClick={() => setOpen(false)} className="block rounded-xl px-3 py-2 text-base font-semibold text-slate-950">
                   About
                 </a>
                 <div className="mt-1 grid gap-1">
-                  {aboutNavItems.filter((item) => item.label !== "About").map((item) => (
-                    <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-white hover:text-[#0F4C5C]">
-                      {item.label}
-                    </a>
-                  ))}
+                  {aboutNavItems
+                    .filter((item) => item.label !== "About")
+                    .map((item) => (
+                      <a key={item.href} href={item.href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-white hover:text-[#0F4C5C]">
+                        {item.label}
+                      </a>
+                    ))}
                 </div>
               </div>
             </nav>
+
             <a href="#contact" onClick={() => setOpen(false)} className="mt-6 inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#0F4C5C] px-5 py-3 text-sm font-semibold text-white shadow-sm">
               Build a Care Program
               <ArrowRight className="h-4 w-4" />
@@ -410,6 +460,7 @@ function Hero() {
             </a>
           </div>
         </div>
+
         <div className="relative">
           <div className="overflow-hidden rounded-[2.2rem] border border-white bg-white p-3 shadow-xl shadow-slate-200/70">
             <img src={images.hero} alt="Medical professional speaking with a patient during a home-based care visit" className="h-[300px] w-full rounded-[1.7rem] object-cover md:h-[390px]" />
@@ -449,16 +500,16 @@ function Hero() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="absolute -bottom-6 -left-5 hidden rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/80 md:block">
-            <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8F4F1] text-[#0F4C5C]">
-                <Users className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-950">Medical care at home</p>
-                <p className="text-sm text-slate-500">Patients, providers, plans, facilities</p>
+              <div className="mt-4 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8F4F1] text-[#0F4C5C]">
+                    <Users className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-950">Medical care at home</p>
+                    <p className="text-sm text-slate-500">Patients, providers, plans, facilities</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -518,6 +569,7 @@ function ClinicalTeam() {
     [Stethoscope, "In-house or onsite visits", "Where appropriate and available, our clinical team can support in-person visits in the home, facility, or senior living setting to bring care closer to the patient."],
     [Users, "Coordinated care team model", "Physicians, advanced practice providers, nurses, care coordinators, and patient engagement specialists work together to support proactive care management workflows."],
   ];
+
   return (
     <section id="clinical-team" className="bg-[#F7FAF9] py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
