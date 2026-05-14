@@ -15,5 +15,56 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      function configureHealthWatchersContactForm() {
+        const form = document.querySelector('form[aria-label="Partnership inquiry form"]');
+
+        if (!form) {
+          window.setTimeout(configureHealthWatchersContactForm, 250);
+          return;
+        }
+
+        form.setAttribute('action', 'https://formsubmit.co/skay@thehealthwatchers.com');
+        form.setAttribute('method', 'POST');
+        form.setAttribute('accept-charset', 'UTF-8');
+
+        const hiddenFields = {
+          _subject: 'New partnership inquiry from The Health Watchers website',
+          _template: 'table',
+          _captcha: 'false',
+          _next: 'https://thehealthwatchers.com/thanks.html',
+          source: 'The Health Watchers Website',
+        };
+
+        Object.entries(hiddenFields).forEach(([name, value]) => {
+          let input = form.querySelector(`input[name="${name}"]`);
+          if (!input) {
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            form.appendChild(input);
+          }
+          input.value = value;
+        });
+
+        let honeypot = form.querySelector('input[name="_honey"]');
+        if (!honeypot) {
+          honeypot = document.createElement('input');
+          honeypot.type = 'text';
+          honeypot.name = '_honey';
+          honeypot.tabIndex = -1;
+          honeypot.autocomplete = 'off';
+          honeypot.style.display = 'none';
+          form.appendChild(honeypot);
+        }
+
+        const submitButton = form.querySelector('button');
+        if (submitButton) {
+          submitButton.type = 'submit';
+        }
+      }
+
+      configureHealthWatchersContactForm();
+    </script>
   </body>
 </html>
