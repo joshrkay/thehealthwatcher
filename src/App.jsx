@@ -118,13 +118,24 @@ const technologyItems = [
 ];
 
 const serviceAreas = [
-  "Birmingham, Michigan",
+  "Michigan-based partners",
   "Metro Detroit",
   "Southeast Michigan",
   "Senior living communities",
   "Patient homes",
   "Facility-based care settings",
 ];
+
+const images = {
+  hero:
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85",
+  homeVisit:
+    "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=85",
+  clinicalTeam:
+    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=1200&q=85",
+  seniorLiving:
+    "https://images.unsplash.com/photo-1576765607924-5f4f510de7d0?auto=format&fit=crop&w=1200&q=85",
+};
 
 const faqs = [
   {
@@ -150,7 +161,7 @@ const faqs = [
   {
     question: "Where is The Health Watchers located?",
     answer:
-      "The Health Watchers is based at 261 East Maple Road, Suite 211, Birmingham, Michigan 48009, and works with partners serving patients in home-based, senior living, and community-based care settings.",
+      "The Health Watchers works with partners serving patients in home-based, senior living, and community-based care settings across Michigan and partner-defined service areas.",
   },
 ];
 
@@ -163,14 +174,6 @@ const organizationSchema = {
   email: "skay@thehealthwatchers.com",
   description:
     "The Health Watchers provides population health medical care, in-home medical visits, telemedicine support, senior living medical support, care gap closure, and coordinated clinical workflows for high-needs patients.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "261 East Maple Road, Suite 211",
-    addressLocality: "Birmingham",
-    addressRegion: "MI",
-    postalCode: "48009",
-    addressCountry: "US",
-  },
   areaServed: serviceAreas,
   medicalSpecialty: ["PrimaryCare", "Geriatric", "CommunityHealth"],
   knowsAbout: [
@@ -263,7 +266,7 @@ function SEO() {
     upsertMeta('meta[name="keywords"]', {
       name: "keywords",
       content:
-        "population health medical care, in-home medical visits, home-based medical care, telemedicine support, senior living medical support, care gap closure, high-risk patient care, Birmingham Michigan healthcare, Metro Detroit in-home medical care",
+        "population health medical care, in-home medical visits, home-based medical care, telemedicine support, senior living medical support, care gap closure, high-risk patient care, Michigan healthcare, Metro Detroit in-home medical care",
     });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: description });
@@ -422,7 +425,7 @@ function Hero() {
             Population health medical care delivered where patients live.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600 md:text-xl md:leading-9">
-            The Health Watchers is a population health in-home medical care provider based in Birmingham, Michigan. We partner with population health organizations, physician groups, and senior care operators to deliver medical care in the home, through telemedicine, and in senior living settings for patients who need more support than the traditional clinic model can provide.
+            The Health Watchers is a population health in-home medical care provider helping organizations support patients where they live. We partner with population health organizations, physician groups, and senior care operators to deliver medical care in the home, through telemedicine, and in senior living settings for patients who need more support than the traditional clinic model can provide.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a
@@ -442,8 +445,13 @@ function Hero() {
         </div>
 
         <div className="relative">
-          <div className="rounded-[2.2rem] border border-white bg-white p-4 shadow-xl shadow-slate-200/70">
-            <div className="rounded-[1.7rem] border border-slate-200 bg-slate-50 p-5">
+          <div className="overflow-hidden rounded-[2.2rem] border border-white bg-white p-3 shadow-xl shadow-slate-200/70">
+            <img
+              src={images.hero}
+              alt="Medical professional speaking with a patient during a home-based care visit"
+              className="h-[300px] w-full rounded-[1.7rem] object-cover md:h-[390px]"
+            />
+            <div className="mt-4 rounded-[1.7rem] border border-slate-200 bg-slate-50 p-5">
               <div className="flex items-center justify-between border-b border-slate-200 pb-5">
                 <div>
                   <p className="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">Population Health Panel</p>
@@ -571,7 +579,7 @@ function ClinicalTeam() {
   return (
     <section id="clinical-team" className="bg-[#F7FAF9] py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionEyebrow>Clinical Team</SectionEyebrow>
             <h2 className="text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-5xl">Medical professionals available virtually and in the home.</h2>
@@ -581,9 +589,16 @@ function ClinicalTeam() {
             <p className="mt-5 text-sm leading-7 text-slate-500">
               Services are coordinated based on patient need, partner workflow, provider oversight, licensure, availability, and applicable regulatory requirements.
             </p>
+            <div className="mt-8 overflow-hidden rounded-[2rem] border border-white bg-white p-3 shadow-lg shadow-slate-200/70">
+              <img
+                src={images.homeVisit}
+                alt="Clinician supporting an older adult patient in a home care setting"
+                className="h-72 w-full rounded-[1.5rem] object-cover"
+              />
+            </div>
           </div>
 
-          <div className="grid gap-5">
+          <div className="grid gap-5 self-center">
             {careOptions.map((option) => {
               const Icon = option.icon;
               return (
@@ -612,6 +627,13 @@ function WhoWeServe() {
     <section id="who-we-serve" className="bg-[#F7FAF9] py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
         <div>
+          <div className="mb-8 overflow-hidden rounded-[2rem] border border-white bg-white p-3 shadow-lg shadow-slate-200/70">
+            <img
+              src={images.seniorLiving}
+              alt="Healthcare team supporting patients in a senior living or community-based care setting"
+              className="h-64 w-full rounded-[1.5rem] object-cover"
+            />
+          </div>
           <SectionEyebrow>Who We Serve</SectionEyebrow>
           <h2 className="text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-5xl">Built for organizations caring for complex patients.</h2>
           <p className="mt-5 text-lg leading-8 text-slate-600">
@@ -720,12 +742,19 @@ function About() {
   return (
     <section id="about" className="bg-[#F7FAF9] py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
-        <div className="rounded-[2rem] bg-[#0F4C5C] p-8 text-white lg:p-10">
-          <SectionEyebrow> </SectionEyebrow>
-          <h2 className="text-4xl font-semibold tracking-[-0.045em] md:text-5xl">Built to help healthcare teams care beyond the visit.</h2>
-          <p className="mt-6 text-lg leading-8 text-white/80">
-            The Health Watchers supports patients with complex needs who often require more consistent, accessible medical attention than the traditional clinic model is built to provide.
-          </p>
+        <div className="overflow-hidden rounded-[2rem] bg-[#0F4C5C] text-white shadow-xl shadow-slate-200/70">
+          <img
+            src={images.clinicalTeam}
+            alt="Healthcare professionals collaborating on patient care"
+            className="h-72 w-full object-cover opacity-95"
+          />
+          <div className="p-8 lg:p-10">
+            <SectionEyebrow> </SectionEyebrow>
+            <h2 className="text-4xl font-semibold tracking-[-0.045em] md:text-5xl">Built to help healthcare teams care beyond the visit.</h2>
+            <p className="mt-6 text-lg leading-8 text-white/80">
+              The Health Watchers supports patients with complex needs who often require more consistent, accessible medical attention than the traditional clinic model is built to provide.
+            </p>
+          </div>
         </div>
         <div className="space-y-5">
           <div className="rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm">
@@ -791,7 +820,7 @@ function ServiceAreaAndFAQ() {
           <SectionEyebrow>Service Area</SectionEyebrow>
           <h2 className="text-4xl font-semibold tracking-[-0.045em] text-slate-950 md:text-5xl">Local presence. Flexible care delivery.</h2>
           <p className="mt-5 text-lg leading-8 text-slate-600">
-            The Health Watchers is based in Birmingham, Michigan and supports care programs across home-based, senior living, and community-based settings. Our model is designed for partners that need reliable medical coverage, virtual follow-up, care gap closure, and visibility across high-needs patient populations.
+            The Health Watchers supports care programs across home-based, senior living, and community-based settings. Our model is designed for partners that need reliable medical coverage, virtual follow-up, care gap closure, and visibility across high-needs patient populations.
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {serviceAreas.map((area) => (
@@ -836,8 +865,6 @@ function Contact() {
           <div className="mt-8 rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm">
             <h3 className="text-lg font-semibold tracking-[-0.03em] text-slate-950">The Health Watchers</h3>
             <p className="mt-3 text-sm leading-7 text-slate-600">
-              261 East Maple Road, Suite 211<br />
-              Birmingham, MI 48009<br />
               <a className="font-semibold text-[#0F4C5C]" href="tel:2487165130">248-716-5130</a><br />
               <a className="font-semibold text-[#0F4C5C]" href="mailto:skay@thehealthwatchers.com">skay@thehealthwatchers.com</a>
             </p>
@@ -912,7 +939,7 @@ function Footer() {
             </div>
           </div>
           <p className="mt-4 max-w-md text-sm leading-6 text-slate-400">
-            Population health in-home medical care, telemedicine, senior living medical support, and care gap closure for high-needs patients in Birmingham, Metro Detroit, and partner care settings.
+            Population health in-home medical care, telemedicine, senior living medical support, and care gap closure for high-needs patients in Michigan and partner care settings.
           </p>
         </div>
         <div className="flex flex-wrap gap-4 text-sm text-slate-300">
