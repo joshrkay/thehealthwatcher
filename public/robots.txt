@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thehealthwatchers.com/sitemap.xml

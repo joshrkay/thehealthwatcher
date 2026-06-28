@@ -33,39 +33,58 @@ const services = [
   {
     icon: Stethoscope,
     title: "In-Home Medical Visits",
+    href: "/services/in-home-medical-visits/",
     description:
       "Medical professionals can visit patients where they live, helping partners support high-needs individuals who may struggle to access traditional office-based care.",
   },
   {
     icon: PhoneCall,
     title: "Telemedicine Support",
+    href: "/services/telemedicine-support/",
     description:
       "Virtual medical visits and follow-up support that help patients, families, facilities, and care teams get timely clinical guidance between in-person encounters.",
   },
   {
     icon: Users,
     title: "Population Health Coverage",
+    href: "/services/population-health-coverage/",
     description:
       "A clinical operating model for organizations managing high-risk, underserved, and hard-to-reach populations across home, facility, and community-based settings.",
   },
   {
     icon: ClipboardCheck,
     title: "Care Gap Closure",
+    href: "/services/care-gap-closure/",
     description:
       "Support identifying patients who need follow-up, routing the right next step, and helping partners close gaps before they become avoidable escalations.",
   },
   {
     icon: Building2,
     title: "Senior Living Medical Support",
+    href: "/services/senior-living-medical-support/",
     description:
       "Clinical support for senior living and post-acute settings, including in-facility visits, virtual follow-up, family communication, and provider coordination.",
   },
   {
     icon: BarChart3,
     title: "Program Visibility & Reporting",
+    href: "/services/program-visibility-reporting/",
     description:
       "Clear reporting that helps partners understand visit activity, patient needs, care gaps, escalations, and program performance across their population.",
   },
+];
+
+const metroDetroitAreas = [
+  { city: "Detroit", href: "/service-areas/detroit/" },
+  { city: "Troy", href: "/service-areas/troy/" },
+  { city: "Royal Oak", href: "/service-areas/royal-oak/" },
+  { city: "Southfield", href: "/service-areas/southfield/" },
+  { city: "Dearborn", href: "/service-areas/dearborn/" },
+  { city: "Warren", href: "/service-areas/warren/" },
+  { city: "Sterling Heights", href: "/service-areas/sterling-heights/" },
+  { city: "Farmington Hills", href: "/service-areas/farmington-hills/" },
+  { city: "Novi", href: "/service-areas/novi/" },
+  { city: "West Bloomfield", href: "/service-areas/west-bloomfield/" },
 ];
 
 const audiences = [
@@ -554,6 +573,10 @@ function Services() {
                 </div>
                 <h3 className="text-xl font-semibold tracking-[-0.03em] text-slate-950">{service.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-600">{service.description}</p>
+                <a href={service.href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0F4C5C] transition hover:gap-2.5">
+                  Learn more
+                  <ArrowRight className="h-4 w-4" />
+                </a>
               </div>
             );
           })}
@@ -809,6 +832,23 @@ function ServiceAreaAndFAQ() {
           <p className="mt-6 text-sm leading-7 text-slate-500">
             Availability of in-home, onsite, and telemedicine services depends on partner program design, clinician availability, licensure, patient need, and applicable regulatory requirements.
           </p>
+
+          <h3 className="mt-10 text-lg font-semibold tracking-[-0.03em] text-slate-950">Communities we serve across Metro Detroit</h3>
+          <p className="mt-2 text-sm leading-7 text-slate-600">
+            Explore population health in-home medical care, telemedicine, and senior living medical support in your area.
+          </p>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {metroDetroitAreas.map((area) => (
+              <a key={area.href} href={area.href} className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-[#0F4C5C] hover:text-[#0F4C5C]">
+                {area.city}, MI
+                <ArrowRight className="h-4 w-4 shrink-0" />
+              </a>
+            ))}
+          </div>
+          <a href="/service-areas/" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0F4C5C] transition hover:gap-2.5">
+            View all service areas
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
         <div id="faq" className="scroll-mt-24">
           <SectionEyebrow>Helpful Answers</SectionEyebrow>
@@ -881,6 +921,12 @@ function Footer() {
           </p>
         </div>
         <div className="flex flex-wrap gap-4 text-sm text-slate-300">
+          <a href="/services/" className="transition hover:text-white">
+            All Services
+          </a>
+          <a href="/service-areas/" className="transition hover:text-white">
+            Service Areas
+          </a>
           {[...navItems, ...aboutNavItems].map((item) => (
             <a key={item.href} href={item.href} className="transition hover:text-white">
               {item.label}
