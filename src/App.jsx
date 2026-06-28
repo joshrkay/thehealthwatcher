@@ -13,6 +13,14 @@ import {
   Users,
   X,
 } from "lucide-react";
+import {
+  faqs,
+  homeJsonLd,
+  homeLinkTags,
+  homeMeta,
+  homeMetaTags,
+  serviceAreas,
+} from "./seo-data.js";
 
 const navItems = [
   { label: "Services", href: "#services" },
@@ -133,15 +141,6 @@ const technologyItems = [
   "Operational workflow improvement",
 ];
 
-const serviceAreas = [
-  "Michigan-based partners",
-  "Metro Detroit",
-  "Southeast Michigan",
-  "Senior living communities",
-  "Patient homes",
-  "Facility-based care settings",
-];
-
 const images = {
   hero:
     "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?auto=format&fit=crop&w=1400&q=80",
@@ -153,121 +152,23 @@ const images = {
     "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1400&q=80",
 };
 
-const faqs = [
-  {
-    question: "What does The Health Watchers do?",
-    answer:
-      "The Health Watchers is a population health medical care partner that supports high-needs patients through in-home medical visits, telemedicine, senior living medical support, care gap closure, and coordinated clinical workflows.",
-  },
-  {
-    question: "Who does The Health Watchers serve?",
-    answer:
-      "The Health Watchers partners with population health organizations, physician groups, skilled nursing facilities, assisted living communities, independent living communities, continuing care retirement communities, and organizations caring for complex patient populations.",
-  },
-  {
-    question: "Do medical professionals visit patients at home?",
-    answer:
-      "Where appropriate and available, medical professionals can support in-home or onsite visits for patients in their home, senior living community, or facility setting. Services are coordinated based on patient need, provider oversight, licensure, availability, and applicable regulatory requirements.",
-  },
-  {
-    question: "Does The Health Watchers provide telemedicine?",
-    answer:
-      "Yes. The Health Watchers can support virtual medical visits and telemedicine follow-up to help patients, families, facilities, and care teams receive timely clinical guidance between in-person encounters.",
-  },
-  {
-    question: "Where is The Health Watchers located?",
-    answer:
-      "The Health Watchers works with partners serving patients in home-based, senior living, and community-based care settings across Michigan and partner-defined service areas.",
-  },
-];
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "MedicalOrganization",
-  name: "The Health Watchers",
-  url: "https://thehealthwatchers.com",
-  telephone: "+1-248-716-5130",
-  email: "skay@thehealthwatchers.com",
-  description:
-    "The Health Watchers provides population health medical care, in-home medical visits, telemedicine support, senior living medical support, care gap closure, and coordinated clinical workflows for high-needs patients.",
-  areaServed: serviceAreas,
-  medicalSpecialty: ["PrimaryCare", "Geriatric", "CommunityHealth"],
-  knowsAbout: [
-    "population health",
-    "in-home medical care",
-    "telemedicine",
-    "senior living medical support",
-    "care gap closure",
-    "high-risk patient support",
-    "home-based care coordination",
-  ],
-};
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Population health in-home medical care",
-  provider: {
-    "@type": "MedicalOrganization",
-    name: "The Health Watchers",
-    url: "https://thehealthwatchers.com",
-  },
-  serviceType:
-    "In-home medical visits, telemedicine, care gap closure, and senior living medical support",
-  areaServed: serviceAreas,
-  audience: [
-    "Population health organizations",
-    "Physician groups",
-    "Skilled nursing facilities",
-    "Assisted living communities",
-    "Independent living communities",
-    "Senior care operators",
-  ],
-  description:
-    "The Health Watchers helps population health organizations, physician groups, and senior care operators deliver medical support where patients live through in-home visits, virtual care, care gap closure, and clinical coordination.",
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-};
-
 function SEO() {
   useEffect(() => {
-    const title = "The Health Watchers | Population Health In-Home Medical Care";
-    const description =
-      "The Health Watchers provides population health in-home medical visits, telemedicine support, senior living medical care, care gap closure, and clinical coordination for high-needs patients.";
-    const canonical = "https://thehealthwatchers.com/";
+    document.title = homeMeta.title;
 
-    document.title = title;
-
-    const upsertMeta = (selector, attributes) => {
+    const upsert = (tag, selector, attributes) => {
       let element = document.head.querySelector(selector);
       if (!element) {
-        element = document.createElement("meta");
+        element = document.createElement(tag);
         document.head.appendChild(element);
       }
       Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
     };
 
-    const upsertLink = (selector, attributes) => {
-      let element = document.head.querySelector(selector);
-      if (!element) {
-        element = document.createElement("link");
-        document.head.appendChild(element);
-      }
-      Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
-    };
+    homeMetaTags.forEach(({ selector, attrs }) => upsert("meta", selector, attrs));
+    homeLinkTags.forEach(({ selector, attrs }) => upsert("link", selector, attrs));
 
-    const upsertJsonLd = (id, data) => {
+    homeJsonLd.forEach(({ id, data }) => {
       let element = document.getElementById(id);
       if (!element) {
         element = document.createElement("script");
@@ -276,43 +177,7 @@ function SEO() {
         document.head.appendChild(element);
       }
       element.textContent = JSON.stringify(data);
-    };
-
-    upsertMeta('meta[name="description"]', { name: "description", content: description });
-    upsertMeta('meta[name="robots"]', {
-      name: "robots",
-      content: "index, follow, max-image-preview:large",
     });
-    upsertMeta('meta[name="keywords"]', {
-      name: "keywords",
-      content:
-        "population health medical care, in-home medical visits, home-based medical care, telemedicine support, senior living medical support, care gap closure, high-risk patient care, Michigan healthcare, Metro Detroit in-home medical care",
-    });
-    upsertMeta('meta[property="og:title"]', { property: "og:title", content: title });
-    upsertMeta('meta[property="og:description"]', {
-      property: "og:description",
-      content: description,
-    });
-    upsertMeta('meta[property="og:type"]', { property: "og:type", content: "website" });
-    upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
-    upsertMeta('meta[property="og:site_name"]', {
-      property: "og:site_name",
-      content: "The Health Watchers",
-    });
-    upsertMeta('meta[name="twitter:card"]', {
-      name: "twitter:card",
-      content: "summary_large_image",
-    });
-    upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: title });
-    upsertMeta('meta[name="twitter:description"]', {
-      name: "twitter:description",
-      content: description,
-    });
-    upsertLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
-
-    upsertJsonLd("health-watchers-organization-schema", organizationSchema);
-    upsertJsonLd("health-watchers-service-schema", serviceSchema);
-    upsertJsonLd("health-watchers-faq-schema", faqSchema);
   }, []);
 
   return null;
@@ -885,7 +750,19 @@ function Contact() {
             </p>
           </div>
         </div>
-        <form className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70 lg:p-8" aria-label="Partnership inquiry form">
+        <form
+          className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/70 lg:p-8"
+          aria-label="Partnership inquiry form"
+          action="https://formsubmit.co/skay@thehealthwatchers.com"
+          method="POST"
+          acceptCharset="UTF-8"
+        >
+          <input type="hidden" name="_subject" value="New partnership inquiry from The Health Watchers website" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://thehealthwatchers.com/thanks.html" />
+          <input type="hidden" name="source" value="The Health Watchers Website" />
+          <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="grid gap-2"><span className="text-sm font-semibold text-slate-700">First name</span><input name="first-name" autoComplete="given-name" className="h-12 rounded-2xl border border-slate-200 px-4 text-sm outline-none transition focus:border-[#0F4C5C]" /></label>
             <label className="grid gap-2"><span className="text-sm font-semibold text-slate-700">Last name</span><input name="last-name" autoComplete="family-name" className="h-12 rounded-2xl border border-slate-200 px-4 text-sm outline-none transition focus:border-[#0F4C5C]" /></label>
@@ -895,7 +772,7 @@ function Contact() {
             <label className="grid gap-2 sm:col-span-2"><span className="text-sm font-semibold text-slate-700">Organization type</span><select name="organization-type" className="h-12 rounded-2xl border border-slate-200 px-4 text-sm outline-none transition focus:border-[#0F4C5C]"><option>Select one</option><option>Skilled Nursing Facility</option><option>Assisted Living Community</option><option>Independent Living Community</option><option>Continuing Care Retirement Community</option><option>Physician Group</option><option>ACO / MSO / Population Health</option><option>Other</option></select></label>
             <label className="grid gap-2 sm:col-span-2"><span className="text-sm font-semibold text-slate-700">How can we help?</span><textarea name="message" rows={5} className="rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-[#0F4C5C]" /></label>
           </div>
-          <button type="button" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0F4C5C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#123F4B]">
+          <button type="submit" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#0F4C5C] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#123F4B]">
             Submit Inquiry
             <ArrowRight className="h-4 w-4" />
           </button>

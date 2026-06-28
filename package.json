@@ -7,24 +7,25 @@
     "dev": "vite",
     "prebuild": "node scripts/generate-seo-pages.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/prerender-home.mjs",
     "preview": "vite preview",
     "seo": "node scripts/generate-seo-pages.mjs",
     "lint": "eslint ."
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest"
+    "vite": "latest"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "latest",
-    "tailwindcss": "latest",
-    "eslint": "latest",
     "@eslint/js": "latest",
+    "@tailwindcss/vite": "latest",
+    "eslint": "latest",
     "eslint-plugin-react-hooks": "latest",
     "eslint-plugin-react-refresh": "latest",
-    "globals": "latest"
+    "globals": "latest",
+    "tailwindcss": "latest"
   }
 }

@@ -63,8 +63,32 @@ To add or edit pages, update the `services` and `locations` data arrays in that
 script and re-run it. `npm run build` runs the generator automatically via the
 `prebuild` step, so deploys always ship fresh pages.
 
+## Homepage Prerendering
+
+The homepage is a React SPA, so its content and SEO tags would normally only
+exist after JavaScript runs. To make it as crawlable as the static landing
+pages, `scripts/prerender-home.mjs` renders the React app to static HTML at
+build time and bakes it into `dist/index.html`, along with the canonical,
+Open Graph, Twitter, and JSON-LD head tags defined in `src/seo-data.js`. The
+browser then hydrates that markup (see `src/main.jsx`).
+
+This runs automatically after `vite build` via the `postbuild` npm script — no
+extra step is needed for deploys. The homepage's SEO metadata and structured
+data live in one place (`src/seo-data.js`), shared by both the runtime `<SEO>`
+component and the prerender step.
+
+The full build chain is:
+
+```
+prebuild  → generate SEO landing pages (scripts/generate-seo-pages.mjs)
+build     → vite build
+postbuild → prerender homepage (scripts/prerender-home.mjs)
+```
+
 ## Notes
 
-- The contact form is currently front-end only. It needs to be connected to a form backend, CRM, email service, or serverless function before launch.
+- The contact form posts to FormSubmit and is wired up declaratively in the
+  React markup (`src/App.jsx`). Confirm the FormSubmit endpoint/flow before
+  launch.
 - The site includes SEO metadata and JSON-LD schema for MedicalOrganization, Service, and FAQPage.
 - This website should not be used to submit protected health information.
